@@ -23,6 +23,8 @@ class CreateSeriesTable extends Migration
             $table->date('start_date');
             $table->date('end_date')->nullable();
             $table->string('img')->nullable();
+            $table->unsignedBigInteger('language_id')->default(1)->nullable();
+            $table->foreign('language_id')->references('id')->on('languages');
 
             $table->timestamps();
         });

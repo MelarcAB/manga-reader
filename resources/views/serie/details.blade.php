@@ -14,7 +14,7 @@
                 <tbody>
                     <tr>
                         <th>Autor</th>
-                        <td>{{ $serie->author() }}</td>
+                        <td>{{ $serie->author->name }}</td>
                     </tr>
                     <tr>
                         <th>Número de tomos</th>
@@ -30,6 +30,10 @@
                         <td>{{ $serie->end_date }}</td>
                     </tr>
                     @endif
+                    <tr>
+                        <th>Idioma</th>
+                        <td>{{ $serie->language->name }}</td>
+                    </tr>
                 </tbody>
             </table>
         </div>

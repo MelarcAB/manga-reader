@@ -23,7 +23,7 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="number_of_issues">Número de tomos</label>
+            <label for="number_of_issues">Número de capítulos</label>
             <input type="number" name="number_of_issues" id="number_of_issues" class="form-control" value="{{ old('number_of_issues') }}">
         </div>
         <div class="form-group">

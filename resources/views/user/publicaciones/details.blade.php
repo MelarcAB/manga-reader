@@ -21,12 +21,12 @@
                 <td>{{ $serie->number_of_issues }}</td>
                 <td>{{ $serie->start_date }}</td>
                 <td>
-                    <form method="POST" action="{{ route('series.destroy', $serie->id) }}">
+                    <a href="{{route('publication.manage',['id'=> $serie->id])}}" class="btn btn-primary">Gestionar</a>
+                    <form method="POST" action="{{ route('series.destroy', $serie->id) }}" style="display: inline-block;">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" onclick="return confirmDelete(this)">Eliminar</button>
+                        <button type="submit" onclick="return confirmDelete(this)" class="btn btn-danger" style="display: inline-block;">Eliminar</button>
                     </form>
-
 
                 </td>
             </tr>

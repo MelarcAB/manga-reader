@@ -35,3 +35,5 @@ Route::get('/publication', [App\Http\Controllers\UserController::class, 'publica
 Route::get('/publication/{id}', [App\Http\Controllers\UserController::class, 'publicacion'])->name('user.edit-publicacion');
 Route::post('/publication', [App\Http\Controllers\UserController::class, 'storePublication'])->name('user.store-publicacion');
 Route::delete('publication/{id}', [App\Http\Controllers\UserController::class, 'destroyPublication'])->middleware('auth')->name('series.destroy');
+Route::get('/publication/{id}/chapters',  [App\Http\Controllers\UserController::class, 'manageChapters'])->name('publication.manage');
+Route::get('/publication/{id}/chapter',  [App\Http\Controllers\UserController::class, 'uploadChapter'])->name('publication.uploadchapter');

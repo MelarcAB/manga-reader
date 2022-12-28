@@ -27,6 +27,28 @@ class UserController extends Controller
         return view('user.publicaciones.form');
     }
 
+    public function manageChapters($id)
+    {
+        $serie = Serie::findOrFail($id);
+
+        //chapters
+        $chapters = $serie->chapters;
+
+
+        return view('user.publicaciones.management', compact('serie', 'chapters'));
+    }
+
+    public function uploadChapter($id)
+    {
+        //comprobamos que el usuario es el autor de la serie
+        $serie = Serie::findOrFail($id);
+        if ($serie->author_id !== auth()->user()->id) {
+            return back()->withErrors(['No tienes permiso para subir capítulos a esta serie']);
+        }
+
+        return view('user.publicaciones.form-chapter', compact('serie'));
+    }
+
 
     public function destroyPublication($id)
     {

@@ -3,7 +3,7 @@
     /* Establece la posición del contenedor como relativa */
     overflow: hidden;
     /* Oculta el contenido que sobresalga del contenedor */
-    height: 200px; /* Establece un alto fijo para el contenedor */
+    height: 400px; /* Establece un alto fijo para el contenedor */
 
 }
 
