@@ -10,4 +10,9 @@ use Illuminate\Database\Eloquent\Model;
 class Chapter extends Model
 {
     use HasFactory;
+
+    public function pages()
+    {
+        return json_decode($this->pages, true);
+    }
 }

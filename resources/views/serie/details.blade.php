@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            <img src="{{ asset('storage/series/'.$serie->img) }}" class="img-fluid" alt="Imagen de la serie">
+            <img src="{{ asset('storage/series/'.$serie->id.'/'.$serie->img) }}" class="img-fluid" alt="Imagen de la serie">
             <p class="text-muted font-weight-bold mt-2">Imagen de la serie</p>
         </div>
         <div class="col-md-9">
@@ -47,7 +47,7 @@
                     <p>Número de capítulo: {{ $chapter->issue_number }}</p>
                     <p>Fecha de lanzamiento: {{ $chapter->release_date }}</p>
                     <div class="d-flex justify-content-between align-items-center">
-                        <a href="#" class="btn btn-primary">Leer</a>
+                        <a href="{{route('chapter.pages',['id'=>$chapter->id])}}" class="btn btn-primary">Leer</a>
                     </div>
                 </div>
             </div>

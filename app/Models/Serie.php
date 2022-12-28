@@ -18,6 +18,6 @@ class Serie extends Model
 
     public function chapters()
     {
-        return $this->hasMany(Chapter::class, 'series_id')->orderBy('issue_number', 'asc');;
+        return $this->hasMany(Chapter::class, 'series_id')->orderBy('issue_number', 'asc');
     }
 }

@@ -25,3 +25,6 @@ Route::get('/', [App\Http\Controllers\HomePublicController::class, 'index'])->na
 Route::get('/serie/{id}', 'App\Http\Controllers\SerieController@show')
     ->where('id', '[0-9]+')
     ->name('serie.show');
+
+//ver detalles capitulo
+Route::get('chapters/{id}', 'App\Http\Controllers\ChapterController@showPages')->name('chapter.pages');

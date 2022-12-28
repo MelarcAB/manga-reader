@@ -22,6 +22,8 @@ class CreateChaptersTable extends Migration
             $table->unsignedBigInteger('series_id');
             $table->foreign('series_id')->references('id')->on('series');
             $table->integer('issue_number');
+            $table->json('pages')->nullable();
+
             $table->date('release_date');
             $table->timestamps();
         });
