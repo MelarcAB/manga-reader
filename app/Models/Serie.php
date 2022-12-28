@@ -9,6 +9,13 @@ use App\Models\Chapter;
 
 class Serie extends Model
 {
+    protected $fillable = [
+        'name', 'number_of_issues', 'start_date', 'end_date', 'img', 'description', 'author_id'
+    ];
+    protected $attributes = [
+        'number_of_issues' => 0,
+    ];
+
     use HasFactory;
 
     public function author()

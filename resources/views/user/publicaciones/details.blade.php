@@ -21,7 +21,12 @@
                 <td>{{ $serie->number_of_issues }}</td>
                 <td>{{ $serie->start_date }}</td>
                 <td>
-                    <a href="#" class="btn btn-danger">Eliminar</a>
+                    <form method="POST" action="{{ route('series.destroy', $serie->id) }}">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" onclick="confirmDelete()">Eliminar</button>
+                    </form>
+
                 </td>
             </tr>
             @endforeach
@@ -30,6 +35,6 @@
     @else
     <p>No tienes ninguna serie publicada.</p>
     @endif
-    <a href="#" class="btn btn-primary mt-2">Crear nueva serie</a>
+    <a href="{{route('user.publicacion')}}" class="btn btn-primary mt-2">Crear nueva serie</a>
 </div>
 @endsection
