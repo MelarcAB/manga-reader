@@ -69,6 +69,20 @@ class SerieChapterSeeder extends Seeder
                 'series_id' => Serie::all()->random()->id,
                 'issue_number' => 1,
                 'release_date' => '2020-01-01',
+                'pages' => '[
+                    {
+                        "url": "https://example.com/page1.jpg",
+                        "name": "1.jpg"
+                    },
+                    {
+                        "url": "https://example.com/page2.jpg",
+                        "name": "2.jpg"
+                    },
+                    {
+                        "url": "https://example.com/page3.jpg",
+                        "name": "3.jpg"
+                    }
+                ]'
             ],
             [
                 'name' => 'Capítulo 2',

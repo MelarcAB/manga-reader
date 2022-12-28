@@ -13,6 +13,12 @@ class Chapter extends Model
 
     public function pages()
     {
-        return json_decode($this->pages, true);
+        $pages = json_decode($this->pages, true);
+
+        if (is_array($pages) && count($pages) > 0) {
+            return $pages;
+        }
+
+        return [];
     }
 }

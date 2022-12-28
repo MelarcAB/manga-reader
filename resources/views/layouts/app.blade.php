@@ -61,6 +61,16 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('user.publicaciones') }}">
+                                    Perfil
+                                </a>
+                                <a class="dropdown-item" href="{{ route('user.publicaciones') }}">
+                                    Publicacioens
+                                </a>
+                                <a class="dropdown-item" href="{{ route('main') }}">
+                                    Gestionar cuenta
+                                </a>
+
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
@@ -70,6 +80,7 @@
                                     @csrf
                                 </form>
                             </div>
+
                         </li>
                         @endguest
                     </ul>

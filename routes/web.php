@@ -28,3 +28,6 @@ Route::get('/serie/{id}', 'App\Http\Controllers\SerieController@show')
 
 //ver detalles capitulo
 Route::get('chapters/{id}', 'App\Http\Controllers\ChapterController@showPages')->name('chapter.pages');
+
+//user gestionar publicaciones
+Route::get('/publications', [App\Http\Controllers\UserController::class, 'publicaciones'])->name('user.publicaciones');
