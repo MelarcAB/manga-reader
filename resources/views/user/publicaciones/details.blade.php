@@ -24,8 +24,9 @@
                     <form method="POST" action="{{ route('series.destroy', $serie->id) }}">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" onclick="confirmDelete()">Eliminar</button>
+                        <button type="submit" onclick="return confirmDelete(this)">Eliminar</button>
                     </form>
+
 
                 </td>
             </tr>
