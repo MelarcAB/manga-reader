@@ -1,0 +1,24 @@
+.card-img-top-container {
+    position: relative;
+    /* Establece la posición del contenedor como relativa */
+    overflow: hidden;
+    /* Oculta el contenido que sobresalga del contenedor */
+    height: 200px; /* Establece un alto fijo para el contenedor */
+
+}
+
+.card-img-top {
+    height: 100%; /* Establece la altura de la imagen en el 100% del contenedor */
+    width: 100%; /* Establece el ancho de la imagen en el 100% del contenedor */
+    object-fit: cover;
+    /* Ajusta la imagen al contenedor y manteniendo las proporciones */
+    transform: scale(1);
+    /* Establece la escala de la imagen en su tamaño original */
+    transition: transform 0.3s ease-in-out;
+    /* Agrega una transición suave al cambio de escala */
+}
+
+.card-img-top:hover {
+    transform: scale(1.2);
+    /* Amplía la escala de la imagen en un 20% */
+}
