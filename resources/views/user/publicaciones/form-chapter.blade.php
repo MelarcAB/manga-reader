@@ -2,9 +2,9 @@
 
 @section('content')
 <div class="container mt-2">
-    <h2>Subir capítulos</h2>
+    <h2>Subir capítulo</h2>
     <p>Serie: {{ $serie->name }}</p>
-    <form action="" method="POST" enctype="multipart/form-data">
+    <form action="{{route('chapter.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <input type="hidden" name="serie_id" value="{{ $serie->id }}">
@@ -18,7 +18,7 @@
             <textarea class="form-control" id="description" name="description"></textarea>
         </div>
         <div class="form-group">
-            <label for="issue_number">Número de tomo</label>
+            <label for="issue_number">Número de capítulo</label>
             <input type="number" class="form-control" id="issue_number" name="issue_number">
         </div>
         <div class="form-group">
@@ -33,4 +33,4 @@
     </form>
 </div>
 
-@endsectionadd
+@endsection

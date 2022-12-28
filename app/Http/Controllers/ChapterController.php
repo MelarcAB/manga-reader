@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Chapter;
+use App\Models\Serie;
 use Illuminate\Http\Request;
 
 class ChapterController extends Controller
@@ -40,28 +41,43 @@ class ChapterController extends Controller
         $chapter = new Chapter;
         $chapter->name = $request->name;
         $chapter->description = $request->description;
-        $chapter->author_id = $request->author_id;
+        // $chapter->author_id = $request->author_id;
         $chapter->series_id = $request->series_id;
         $chapter->issue_number = $request->issue_number;
         $chapter->release_date = $request->release_date;
 
+        //el author_id se obtiene del usuario autenticado
+        $chapter->author_id = auth()->user()->id;
+        //series_id se obtiene de la serie seleccionada
+        $chapter->series_id = $request->serie_id;
+        //verificar que la serie seleccionada pertenezca al usuario autenticado
+        $serie = Serie::find($request->serie_id);
+        if ($serie->author_id != auth()->user()->id) {
+            return redirect()->route('main');
+        }
+        $chapter->save();
+
         // Procesar las páginas del capítulo
         if ($request->hasFile('pages')) {
             $pages = [];
+            //crear el directorio si no existe
             foreach ($request->pages as $page) {
-                $path = $page->move('storage/series/' . $request->series_id . '/chapters/' . $chapter->id, $page->getClientOriginalName());
+                $path = $page->move('storage/series/' . $chapter->series_id . "/" . "chapters/" . $chapter->id, $page->getClientOriginalName());
                 $pages[] = [
                     'name' => $page->getClientOriginalName(),
                     'path' => $path,
                 ];
             }
+            //convertir pages a json
+            $pages = json_encode($pages);
             $chapter->pages = $pages;
         }
+
 
         // Guardar el capítulo
         $chapter->save();
         // Redirigir al usuario a la lista de capítulos
-        return redirect()->route('chapters.index');
+        return redirect()->route('chapter.pages', ['id' => $chapter->id]);
     }
 
     public function showPages($id)
