@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Serie;
+use App\Models\Chapter;
+use Exception;
 use Illuminate\Http\Request;
 
 class SerieController extends Controller
@@ -44,9 +46,15 @@ class SerieController extends Controller
      * @param  \App\Models\Serie  $serie
      * @return \Illuminate\Http\Response
      */
-    public function show(Serie $serie)
+    public function show($id)
     {
-        //
+        try {
+            $serie = Serie::findOrFail($id);
+            $chapters = $serie->chapters;
+            return view('serie.details', compact('serie', 'chapters'));
+        } catch (Exception $e) {
+            return redirect()->route('main');
+        }
     }
 
     /**

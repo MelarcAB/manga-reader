@@ -20,3 +20,8 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', [App\Http\Controllers\HomePublicController::class, 'index'])->name('main');
+
+//ver detalles serie
+Route::get('/serie/{id}', 'App\Http\Controllers\SerieController@show')
+    ->where('id', '[0-9]+')
+    ->name('serie.show');

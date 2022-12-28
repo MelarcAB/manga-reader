@@ -60,11 +60,12 @@ class SerieChapterSeeder extends Seeder
         }
 
         // Crea algunos capítulos y asigna una serie y un autor aleatorio a cada uno
+        $id_autor = 1;
         $chaptersData = [
             [
                 'name' => 'Capítulo 1',
                 'description' => 'Descripción del capítulo 1',
-                'author_id' => User::all()->random()->id,
+                'author_id' => $id_autor,
                 'series_id' => Serie::all()->random()->id,
                 'issue_number' => 1,
                 'release_date' => '2020-01-01',
@@ -72,10 +73,26 @@ class SerieChapterSeeder extends Seeder
             [
                 'name' => 'Capítulo 2',
                 'description' => 'Descripción del capítulo 2',
-                'author_id' => User::all()->random()->id,
+                'author_id' => $id_autor,
                 'series_id' => Serie::all()->random()->id,
                 'issue_number' => 2,
                 'release_date' => '2020-02-01',
+            ],
+            [
+                'name' => 'Capítulo 3',
+                'description' => 'Descripción del capítulo 3',
+                'author_id' => $id_autor,
+                'series_id' => Serie::all()->random()->id,
+                'issue_number' => 3,
+                'release_date' => '2020-03-01',
+            ],
+            [
+                'name' => 'Capítulo 4',
+                'description' => 'Descripción del capítulo 4',
+                'author_id' => $id_autor,
+                'series_id' => Serie::all()->random()->id,
+                'issue_number' => 4,
+                'release_date' => '2020-04-01',
             ],
             // Agrega más capítulos si quieres
         ];

@@ -22,7 +22,7 @@
                             <p>Autor: {{ $serie->author() }}</p>
                             <div class="card-footer">
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <a href="#" class="btn btn-primary btn-block">Ver más</a>
+                                    <a href="{{route('serie.show',['id'=>$serie->id])}}" class="btn btn-primary btn-block">Ver más</a>
                                 </div>
                             </div>
 
