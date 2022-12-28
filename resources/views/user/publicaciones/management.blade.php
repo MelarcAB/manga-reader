@@ -36,6 +36,6 @@
     @else
     <p>No hay capítulos para esta serie.</p>
     @endif
-    <a href="{{route('publication.uploadchapter',$chapter->series_id)}}" class="btn btn-primary mt-2">Subir capítulo</a>
+    <a href="{{route('publication.uploadchapter',$serie->id)}}" class="btn btn-primary mt-2">Subir capítulo</a>
 </div>
 @endsection
