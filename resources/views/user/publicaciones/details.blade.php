@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container">
+<div class="container palette-container">
     <h2>Publicaciones</h2>
     @if (count($series) > 0)
     <table class="table">
@@ -10,7 +10,7 @@
             <tr>
                 <th>Nombre</th>
                 <th>Imagen</th>
-                <th>Número de tomos</th>
+                <th>Número de capítulos</th>
                 <th>Fecha de inicio</th>
                 <th>Acciones</th>
             </tr>

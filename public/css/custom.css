@@ -89,9 +89,14 @@
   .custom-last-chapters{
     background-color: var(--secondary);
     color : var(--quaternary);
-   
   
   }
   
+  .card-body-color-custom{
+    border: none;
+    border-radius: 25px;
+    background-color: var(--quinary);
+    color : var(--secondary);
+  }
   
   

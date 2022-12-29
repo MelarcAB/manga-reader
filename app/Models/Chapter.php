@@ -26,4 +26,21 @@ class Chapter extends Model
     {
         return $this->belongsTo('App\Models\Serie', 'series_id');
     }
+
+
+    public function getNextChapter()
+    {
+        return self::where('series_id', $this->series_id)
+            ->where('issue_number', '>', $this->issue_number)
+            ->orderBy('issue_number', 'asc')
+            ->first();
+    }
+
+    public function previousChapter()
+    {
+        return self::where('series_id', $this->series_id)
+            ->where('issue_number', '<', $this->issue_number)
+            ->orderBy('issue_number', 'desc')
+            ->first();
+    }
 }

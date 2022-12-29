@@ -47,8 +47,8 @@
 
         @foreach ($serie->chapters as $chapter)
         <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-                <div class="card-body">
+            <div class="card mb-4 shadow-sm card-no-border card-body-color-custom">
+                <div class="card-body card-body-color-custom">
                     <h5 class="card-title">{{ $chapter->issue_number }} : {{ $chapter->name }}</h5>
                     <p class="card-text">{{ $chapter->description }}</p>
                     <p>Número de capítulo: {{ $chapter->issue_number }}</p>

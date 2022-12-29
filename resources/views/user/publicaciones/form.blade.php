@@ -15,10 +15,7 @@
             <textarea name="description" id="description" class="form-control">{{ old('description') }}</textarea>
         </div>
 
-        <div class="form-group">
-            <label for="number_of_issues">Número de capítulos</label>
-            <input type="number" name="number_of_issues" id="number_of_issues" class="form-control" value="{{ old('number_of_issues') }}">
-        </div>
+        <input type="hidden" name="number_of_issues" id="number_of_issues" class="form-control" value="1">
         <div class="form-group">
             <label for="start_date">Fecha de inicio</label>
             <input type="date" name="start_date" id="start_date" class="form-control" value="{{ old('start_date') }}">

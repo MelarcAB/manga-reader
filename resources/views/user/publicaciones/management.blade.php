@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container palette-container">
     <h2>Capítulos de la serie "{{ $serie->name }}"</h2>
 
     @if (count($chapters) > 0)

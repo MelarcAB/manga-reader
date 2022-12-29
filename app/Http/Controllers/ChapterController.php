@@ -84,9 +84,12 @@ class ChapterController extends Controller
     {
         // Obtener el capítulo por su id
         $chapter = Chapter::find($id);
+        //obtener capitulo anterior y siguiente
+        $previousChapter = $chapter->previousChapter();
+        $nextChapter = $chapter->getNextChapter();
 
         // Mostrar la vista de las páginas del capítulo
-        return view('chapter.show', compact('chapter'));
+        return view('chapter.show', compact('chapter', 'previousChapter', 'nextChapter'));
     }
 
     /**
