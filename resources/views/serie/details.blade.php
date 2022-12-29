@@ -33,6 +33,10 @@
                         <th>Idioma</th>
                         <td>{{ $serie->language->name }}</td>
                     </tr>
+                    <tr>
+                        <th>Géneros</th>
+                        <td>{{ implode(', ', $serie->getGenresNames()) }}</td>
+                    </tr>
                 </tbody>
             </table>
         </div>

@@ -32,4 +32,19 @@ class Serie extends Model
     {
         return $this->belongsTo(Language::class);
     }
+
+    public function genres()
+    {
+        return $this->belongsToMany(Genre::class);
+    }
+
+    public function getGenresNames()
+    {
+        $genres = $this->genres;
+        $genresNames = [];
+        foreach ($genres as $genre) {
+            $genresNames[] = $genre->name;
+        }
+        return $genresNames;
+    }
 }
