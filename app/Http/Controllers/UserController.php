@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Serie;
+use App\Models\Chapter;
 
 use Illuminate\Http\Request;
 
@@ -36,6 +37,21 @@ class UserController extends Controller
 
 
         return view('user.publicaciones.management', compact('serie', 'chapters'));
+    }
+
+    public function deleteChapter($id)
+    {
+        $chapter = Chapter::findOrFail($id);
+        $serie = Serie::findOrFail($chapter->series_id);
+
+        //comprobamos que el usuario es el autor de la serie
+        if ($serie->author_id !== auth()->user()->id) {
+            return back()->withErrors(['No tienes permiso para eliminar capítulos de esta serie']);
+        }
+
+        $chapter->delete();
+
+        return back()->with('success', 'Capítulo eliminado correctamente');
     }
 
     public function uploadChapter($id)

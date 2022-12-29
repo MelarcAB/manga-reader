@@ -23,10 +23,10 @@
                 <td>
                     <a href="{{ route('chapter.pages', $chapter->id) }}" class="btn btn-primary">Ver</a>
                     <a href="" class="btn btn-warning">Editar</a>
-                    <form action="" method="POST" style="display: inline-block;">
+                    <form action="{{route('chapter.destroy',['id'=>$chapter->id])}}" method="POST" style="display: inline-block;">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de querer eliminar este capítulo?');">Eliminar</button>
+                        <button type="submit" class="btn btn-danger" onclick="return confirmDelete(this)">Eliminar</button>
                     </form>
                 </td>
             </tr>

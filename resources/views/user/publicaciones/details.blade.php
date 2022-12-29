@@ -9,6 +9,7 @@
         <thead>
             <tr>
                 <th>Nombre</th>
+                <th>Imagen</th>
                 <th>Número de tomos</th>
                 <th>Fecha de inicio</th>
                 <th>Acciones</th>
@@ -18,7 +19,12 @@
             @foreach ($series as $serie)
             <tr>
                 <td>{{ $serie->name }}</td>
-                <td>{{ $serie->number_of_issues }}</td>
+                <td>
+                    <img src="{{ asset('storage/series/'.$serie->id.'/'.$serie->img) }}" alt="Imagen de la serie {{ $serie->name }}" width="50">
+
+                </td>
+
+                <td>{{ count($serie->chapters) }}</td>
                 <td>{{ $serie->start_date }}</td>
                 <td>
                     <a href="{{route('publication.manage',['id'=> $serie->id])}}" class="btn btn-primary">Gestionar</a>

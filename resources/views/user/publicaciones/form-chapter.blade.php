@@ -1,6 +1,14 @@
+<?php
+
+use Carbon\Carbon;
+
+$today = Carbon::now()->toDateString();
+?>
 @extends('layouts.app')
 
 @section('content')
+
+
 <div class="container mt-2">
     <h2>Subir capítulo</h2>
     <p>Serie: {{ $serie->name }}</p>
@@ -21,14 +29,17 @@
             <label for="issue_number">Número de capítulo</label>
             <input type="number" class="form-control" id="issue_number" name="issue_number">
         </div>
-        <div class="form-group">
-            <label for="release_date">Fecha de publicación</label>
-            <input type="date" class="form-control" id="release_date" name="release_date">
+        <div class="form-row">
+            <div class="col-5" style="display: inline-block;">
+                <label for="release_date">Fecha de publicación</label>
+                <input type="date" class="form-control" id="release_date" name="release_date" value="<?php echo $today; ?>">
+            </div>
+            <div class="col-5" style="display: inline-block;">
+                <label for="pages">Páginas</label>
+                <input type="file" class="form-control" id="pages" name="pages[]" multiple>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="pages">Páginas</label>
-            <input type="file" class="form-control" id="pages" name="pages[]" multiple>
-        </div>
+        <br>
         <button type="submit" class="btn btn-primary">Subir</button>
     </form>
 </div>
