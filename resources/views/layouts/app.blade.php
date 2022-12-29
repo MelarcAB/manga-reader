@@ -27,7 +27,7 @@
 
 </head>
 
-<body>
+<body class="d-flex flex-column">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light  shadow-sm">
             <div class="container">
@@ -95,10 +95,12 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="flex-grow-1" style="padding: 15px;">
             @yield('content')
         </main>
     </div>
+    @include('layouts/footer')
+
 </body>
 <script src="{{ asset('js/test.js') }}"></script>
 

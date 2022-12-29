@@ -1,11 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container palette-container">
     <div class="row">
         <div class="col-md-3">
             <img src="{{ asset('storage/series/'.$serie->id.'/'.$serie->img) }}" class="img-fluid" alt="Imagen de la serie">
-            <p class="text-muted font-weight-bold mt-2">Imagen de la serie</p>
         </div>
         <div class="col-md-9">
             <h1>{{ $serie->name }}</h1>

@@ -21,4 +21,9 @@ class Chapter extends Model
 
         return [];
     }
+
+    function serie()
+    {
+        return $this->belongsTo('App\Models\Serie', 'series_id');
+    }
 }
