@@ -27,6 +27,7 @@
                 <td>{{ count($serie->chapters) }}</td>
                 <td>{{ $serie->start_date }}</td>
                 <td>
+                    <a href="{{route('user.edit-publicacion',['id'=> $serie->id])}}" class="btn btn-primary">Editar</a>
                     <a href="{{route('publication.manage',['id'=> $serie->id])}}" class="btn btn-primary">Gestionar</a>
                     <form method="POST" action="{{ route('series.destroy', $serie->id) }}" style="display: inline-block;">
                         @csrf

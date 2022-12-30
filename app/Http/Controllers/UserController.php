@@ -23,10 +23,16 @@ class UserController extends Controller
         return view('user.publicaciones.details', compact('series'));
     }
 
-    function publicacion()
+    function publicacion($id = null)
     {
-        return view('user.publicaciones.form');
+        if ($id) {
+            $serie = Serie::findOrFail($id);
+        } else {
+            $serie = new Serie();
+        }
+        return view('user.publicaciones.form', compact('serie'));
     }
+
 
     public function manageChapters($id)
     {
@@ -86,6 +92,8 @@ class UserController extends Controller
 
     public function storePublication(Request $request)
     {
+
+
         // Validar la petición
         $request->validate([
             'name' => 'required|max:255',
@@ -93,8 +101,25 @@ class UserController extends Controller
             'number_of_issues' => 'required|integer',
             'start_date' => 'required|date',
             'end_date' => 'nullable|date',
-            'img' => 'required|image',
+            'img' => 'nullable|image',
         ]);
+
+        //si existe el campo serie_id es que se está editando
+        if ($request->serie_id && $request->serie_id !== null) {
+
+            $serie = Serie::findOrFail($request->serie_id);
+            //comprobamos que el usuario es el autor de la serie
+            if ($serie->author_id !== auth()->user()->id) {
+                return back()->withErrors(['No tienes permiso para editar esta serie']);
+            }
+            $serie->name = $request->name;
+            $serie->description = $request->description;
+            $serie->number_of_issues = $request->number_of_issues;
+            $serie->start_date = $request->start_date;
+            $serie->end_date = $request->end_date;
+            $serie->save();
+            return redirect()->route('user.edit-publicacion', ['id' => $serie->id]);
+        }
 
         // Obtener el usuario autenticado
         $user = $user = auth()->user();

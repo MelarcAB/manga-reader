@@ -32,7 +32,9 @@ Route::get('chapters/{id}', 'App\Http\Controllers\ChapterController@showPages')-
 //user gestionar publicaciones
 Route::get('/publications', [App\Http\Controllers\UserController::class, 'publicaciones'])->name('user.publicaciones');
 Route::get('/publication', [App\Http\Controllers\UserController::class, 'publicacion'])->name('user.publicacion');
-Route::get('/publication/{id}', [App\Http\Controllers\UserController::class, 'publicacion'])->name('user.edit-publicacion');
+Route::get('/publication/{id}', [App\Http\Controllers\UserController::class, 'publicacion'])
+    ->where('id', '[0-9]+')
+    ->name('user.edit-publicacion');
 Route::post('/publication', [App\Http\Controllers\UserController::class, 'storePublication'])->name('user.store-publicacion');
 Route::delete('publication/{id}', [App\Http\Controllers\UserController::class, 'destroyPublication'])->middleware('auth')->name('series.destroy');
 Route::delete('publication/chapter/{id}', [App\Http\Controllers\UserController::class, 'deleteChapter'])->middleware('auth')->name('chapter.destroy');
