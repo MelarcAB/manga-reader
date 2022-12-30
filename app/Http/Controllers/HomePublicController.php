@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Serie;
 use App\Models\User;
 use App\Models\Chapter;
+use App\Models\SocialNet;
 
 class HomePublicController extends Controller
 {
@@ -24,6 +25,8 @@ class HomePublicController extends Controller
 
         $user = User::where('nickname', $nickname)->firstOrFail();
         $series = Serie::where('author_id', $user->id)->get();
-        return view('user.public.profile', compact('user', 'series'));
+        //social networks
+        $socialNets = $user->social_nets;
+        return view('user.public.profile', compact('user', 'series', 'socialNets'));
     }
 }

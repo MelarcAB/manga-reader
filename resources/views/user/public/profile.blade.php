@@ -9,7 +9,13 @@
         </div>
         <div class="col-8">
             <h1>{{ $user->nickname }}</h1>
-            <p>{{ $user->description }}</p>
+            <p>{!! nl2br($user->description) !!}</p>
+            <ul>
+                REDES SOCIALES
+                @foreach($socialNets as $social_network)
+                <li><a href="{{ $social_network->url }}">{{ $social_network->name }}</a></li>
+                @endforeach
+            </ul>
         </div>
     </div>
     <hr>

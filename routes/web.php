@@ -48,3 +48,5 @@ Route::post('/publication/newchapter', [App\Http\Controllers\ChapterController::
 Route::get('/u/{nickname}', [App\Http\Controllers\HomePublicController::class, 'showPublicProfile'])->name('user.public-profile');
 Route::get('/manage-account', [App\Http\Controllers\UserController::class, 'manageAccountView'])->name('user.manage-account');
 Route::post('/manage-account/update-account-info', [App\Http\Controllers\UserController::class, 'updateAccountInfo'])->name('user.update-account-info');
+Route::get('/manage-profile', [App\Http\Controllers\UserController::class, 'manageProfileView'])->name('user.manage-profile');
+Route::post('/manage-account/update-profile-info', [App\Http\Controllers\UserController::class, 'updateProfileInfo'])->name('user.update-profile-info');

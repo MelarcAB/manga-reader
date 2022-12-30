@@ -190,6 +190,11 @@ class UserController extends Controller
         return view('user.gestion.cuenta');
     }
 
+    public function manageProfileView()
+    {
+        return view('user.gestion.perfil');
+    }
+
     public function updateAccountInfo(Request $request)
     {
         // Validate form data
@@ -213,6 +218,27 @@ class UserController extends Controller
         }
 
         // Show success message or redirect to public profile page
-        return redirect()->route('user.public-profile', ['nickname' => $user->nickname])->with('success', 'Imagen de perfil actualizada con éxito');
+        return redirect()->route('user.manage-account')->with('success', 'Perfil actualizado con éxito');
+    }
+
+    public function updateProfileInfo(Request $request)
+    {
+        //camps name y description
+        // Validate form data
+        $request->validate([
+            'name' => 'required|max:255',
+            'description' => 'required',
+        ]);
+
+        // Get current user
+        $user = $user = auth()->user();
+
+        // Update user's name and description
+        $user->name = $request->name;
+        $user->description = $request->description;
+        $user->save();
+
+        // Show success message or redirect to public profile page
+        return redirect()->route('user.manage-profile')->with('success', 'Perfil actualizado con éxito');
     }
 }
