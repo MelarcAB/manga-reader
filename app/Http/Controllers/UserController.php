@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Serie;
 use App\Models\Chapter;
 use App\Models\Genre;
+use App\Models\SocialNet;
+use App\Models\UserSocialNet;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 
@@ -192,7 +195,16 @@ class UserController extends Controller
 
     public function manageProfileView()
     {
-        return view('user.gestion.perfil');
+        $user = auth()->user();
+        //obtener redes sociales del usuario
+        $userSocialNets = [];
+        $userSocialNetRecords = DB::table('user_socialnet')->where('user_id', $user->id)->get();
+        foreach ($userSocialNetRecords as $record) {
+            $userSocialNets[$record->socialnet_id] = $record->url;
+        }
+        $socialNets = SocialNet::all();
+
+        return view('user.gestion.perfil', compact('socialNets', 'userSocialNets'));
     }
 
     public function updateAccountInfo(Request $request)
@@ -236,7 +248,33 @@ class UserController extends Controller
         // Update user's name and description
         $user->name = $request->name;
         $user->description = $request->description;
+
+
         $user->save();
+        // Obtener el array de redes sociales del formulario
+        $socialNets = $request->input('social_nets');
+
+        //limpiar las relaciones actualmente existentes
+        $user->socialNets()->detach();
+
+
+        foreach ($socialNets as $socialNetId => $socialNetUrl) {
+            // Aquí puedes hacer lo que necesites con cada red social, por ejemplo:
+            // - eliminar todas las redes sociales del usuario
+            //si es null continuar
+            if ($socialNetUrl == null) {
+                continue;
+            }
+
+            $userSocialNet = new UserSocialNet;
+            $userSocialNet->socialnet_id = $socialNetId;
+            $userSocialNet->user_id = $user->id;
+
+            // Actualizar la URL de la red social
+            $userSocialNet->url = $socialNetUrl;
+            $userSocialNet->save();
+        }
+
 
         // Show success message or redirect to public profile page
         return redirect()->route('user.manage-profile')->with('success', 'Perfil actualizado con éxito');

@@ -18,6 +18,18 @@
         <textarea name="description" id="description" class="form-control">{{ Auth::user()->description }}</textarea>
     </div>
 
+    <br>
+    <div class="form-group">
+        <label for="social_nets">Redes sociales</label>
+        <div class="row">
+            @foreach ($socialNets as $socialNet)
+            <div class="col-md-3">
+                <i class="{{ $socialNet->icon }}"></i> {{ $socialNet->name }}:
+                <input type="text" name="social_nets[{{ $socialNet->id }}]" placeholder="URL" class="form-control" value="{{ $userSocialNets[$socialNet->id] ?? '' }}">
+            </div>
+            @endforeach
+        </div>
+    </div>
 
     <br>
 

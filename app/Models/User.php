@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use App\Models\SocialNet;
+use App\Models\UserSocialNet;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -74,8 +75,10 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
-    public function social_nets()
+
+    public function socialNets()
     {
-        return $this->hasMany(SocialNet::class);
+        // return $this->belongsToMany(SocialNet::class, 'user_socialnet', 'user_id', 'socialnet_id');
+        return $this->belongsToMany(SocialNet::class, 'user_socialnet', 'user_id', 'socialnet_id')->withPivot('url');
     }
 }

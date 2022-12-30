@@ -2,20 +2,24 @@
 
 @section('content')
 
-<div class="container mt-5">
+<div class="container mt-5 palette-container">
     <div class="row">
         <div class="col-3">
             <img src="{{ asset('storage/users/'.$user->image) }}" alt="Imagen de perfil" class="img-thumbnail img-fluid" style="max-width: 100%;">
         </div>
         <div class="col-8">
             <h1>{{ $user->nickname }}</h1>
-            <p>{!! nl2br($user->description) !!}</p>
-            <ul>
-                REDES SOCIALES
-                @foreach($socialNets as $social_network)
-                <li><a href="{{ $social_network->url }}">{{ $social_network->name }}</a></li>
+            <ul class="list-inline">
+                @foreach($socialNets as $socialNet)
+                <li class="list-inline-item">
+                    <a href="{{ $socialNet->pivot->url }}">
+                        <i class="{{ $socialNet->icon }}"></i> {{ $socialNet->name }}
+                    </a>
+                </li>
                 @endforeach
             </ul>
+            <p>{!! nl2br($user->description) !!}</p>
+
         </div>
     </div>
     <hr>

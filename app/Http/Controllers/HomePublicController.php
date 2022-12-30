@@ -26,7 +26,7 @@ class HomePublicController extends Controller
         $user = User::where('nickname', $nickname)->firstOrFail();
         $series = Serie::where('author_id', $user->id)->get();
         //social networks
-        $socialNets = $user->social_nets;
+        $socialNets = $user->socialNets;
         return view('user.public.profile', compact('user', 'series', 'socialNets'));
     }
 }
