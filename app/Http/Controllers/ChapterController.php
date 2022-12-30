@@ -37,6 +37,43 @@ class ChapterController extends Controller
     public function store(Request $request)
     {
         // Validar el formulario
+
+        //si existe chapter_id, se edita el capítulo
+        if ($request->chapter_id != null) {
+            $chapter = Chapter::find($request->chapter_id);
+            //verificar que el usuario autenticado es el autor de la serie
+            $serie = Serie::find($chapter->series_id);
+            if ($serie->author_id != auth()->user()->id) {
+                return redirect()->route('main');
+            }
+            //actualizar datos
+            $chapter->name = $request->name;
+            $chapter->description = $request->description;
+            $chapter->issue_number = $request->issue_number;
+            $chapter->release_date = $request->release_date;
+            // Procesar las páginas del capítulo
+            //se eliminan las páginas anteriores y se agregan las nuevas
+            if ($request->hasFile('pages')) {
+                $pages = [];
+                //crear el directorio si no existe
+                foreach ($request->pages as $page) {
+                    $path = $page->move('storage/series/' . $chapter->series_id . "/" . "chapters/" . $chapter->id, $page->getClientOriginalName());
+                    $pages[] = [
+                        'name' => $page->getClientOriginalName(),
+                        'path' => $path,
+                    ];
+                }
+                //convertir pages a json
+                $pages = json_encode($pages);
+                $chapter->pages = $pages;
+            }
+
+            // Guardar el capítulo
+            $chapter->save();
+            // Redirigir al usuario a la lista de capítulos
+            return redirect()->route('publication.uploadeditchapter', ['id' => $chapter->series_id, 'idchapter' => $chapter->id]);
+        }
+
         // Crear un nuevo chapter
         $chapter = new Chapter;
         $chapter->name = $request->name;

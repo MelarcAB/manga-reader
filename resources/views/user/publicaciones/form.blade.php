@@ -3,9 +3,19 @@
 @section('content')
 
 <div class="container">
-    <h1>Crear nueva serie</h1>
+
+    @if($serie->id != null)
+    <h1>Editar serie</h1>
+    @else
+    <h1>Crear serie</h1>
+    @endif
     <form action="{{route('user.store-publicacion')}}" method="POST" enctype="multipart/form-data">
         @csrf
+        @if($serie->img)
+        <div class="form-group">
+            <img src="{{ asset('storage/series/'.$serie->id.'/'.$serie->img)  }}" alt="Imagen de la serie" class="img-thumbnail img-fluid " style="width: 15%;">
+        </div>
+        @endif
         <div class="form-group">
             <label for="name">Nombre</label>
             <input type="text" name="name" id="name" class="form-control" value="{{ $serie->name }}">
@@ -27,7 +37,9 @@
         <div class="form-group">
             <label for="img">Imagen de la serie</label>
             <input type="file" name="img" id="img" class="form-control-file">
+
         </div>
+
         <input type="hidden" name="serie_id" value="{{ $serie->id }}">
 
         @if($serie->id != null)
@@ -38,4 +50,5 @@
 
     </form>
 </div>
+
 @endsection

@@ -60,7 +60,7 @@ class UserController extends Controller
         return back()->with('success', 'Capítulo eliminado correctamente');
     }
 
-    public function uploadChapter($id)
+    public function uploadChapter($id = 0, $idchapter = 0)
     {
         //comprobamos que el usuario es el autor de la serie
         $serie = Serie::findOrFail($id);
@@ -68,7 +68,13 @@ class UserController extends Controller
             return back()->withErrors(['No tienes permiso para subir capítulos a esta serie']);
         }
 
-        return view('user.publicaciones.form-chapter', compact('serie'));
+        if ($idchapter) {
+            $chapter = Chapter::findOrFail($idchapter);
+        } else {
+            $chapter = new Chapter();
+        }
+
+        return view('user.publicaciones.form-chapter', compact('serie', 'chapter'));
     }
 
 
@@ -118,6 +124,17 @@ class UserController extends Controller
             $serie->start_date = $request->start_date;
             $serie->end_date = $request->end_date;
             $serie->save();
+
+            //si se ha subido una imagen nueva, se borra la anterior y se guarda la nueva
+            if ($request->img) {
+                //borramos la imagen anterior
+                unlink(storage_path('app/public/series/' . $serie->id . '/' . $serie->img));
+                //subimos la nueva imagen
+                $request->img->storeAs('public/series/' . $serie->id, $serie->id . '.' . $request->img->extension());
+                //si se ha subido la imagen, se guarda la ruta en la base de datos campo img
+                $serie->img =  $serie->id . '.' . $request->img->extension();
+                $serie->save();
+            }
             return redirect()->route('user.edit-publicacion', ['id' => $serie->id]);
         }
 

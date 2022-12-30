@@ -22,7 +22,7 @@
                 <td>{{ $chapter->release_date }}</td>
                 <td>
                     <a href="{{ route('chapter.pages', $chapter->id) }}" class="btn btn-primary">Ver</a>
-                    <a href="" class="btn btn-warning">Editar</a>
+                    <a href="{{route('publication.uploadeditchapter',['id'=>$chapter->series_id,'idchapter'=>$chapter->id])}}" class="btn btn-warning">Editar</a>
                     <form action="{{route('chapter.destroy',['id'=>$chapter->id])}}" method="POST" style="display: inline-block;">
                         @csrf
                         @method('DELETE')
