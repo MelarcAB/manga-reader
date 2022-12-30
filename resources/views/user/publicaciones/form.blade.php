@@ -35,13 +35,24 @@
             <input type="date" name="end_date" id="end_date" class="form-control" value="{{ $serie->end_date }}">
         </div>
         <div class="form-group">
+            <label for="genres">Géneros</label>
+            <?php $selectedGenres = $serie->genres->pluck('id')->toArray(); ?>
+            <select name="genres[]" id="genres" class="form-control" multiple>
+                @foreach($genres as $genre)
+                <option value="{{ $genre->id }}" {{ in_array($genre->id, $selectedGenres) ? 'selected' : '' }}>{{ $genre->name }}</option>
+                @endforeach
+            </select>
+
+        </div>
+
+        <div class="form-group">
             <label for="img">Imagen de la serie</label>
             <input type="file" name="img" id="img" class="form-control-file">
 
         </div>
 
         <input type="hidden" name="serie_id" value="{{ $serie->id }}">
-
+        <br>
         @if($serie->id != null)
         <button type="submit" class="btn btn-primary">Editar</button>
         @else

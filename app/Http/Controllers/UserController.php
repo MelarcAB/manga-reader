@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Serie;
 use App\Models\Chapter;
+use App\Models\Genre;
 
 use Illuminate\Http\Request;
 
@@ -30,7 +31,11 @@ class UserController extends Controller
         } else {
             $serie = new Serie();
         }
-        return view('user.publicaciones.form', compact('serie'));
+
+        //obtener generos
+        $genres = Genre::all();
+
+        return view('user.publicaciones.form', compact('serie', 'genres'));
     }
 
 
@@ -123,6 +128,12 @@ class UserController extends Controller
             $serie->number_of_issues = $request->number_of_issues;
             $serie->start_date = $request->start_date;
             $serie->end_date = $request->end_date;
+            if ($request->genres) {
+                $serie->genres()->detach();
+                $serie->genres()->attach($request->input('genres'));
+            } else {
+                $serie->genres()->detach();
+            }
             $serie->save();
 
             //si se ha subido una imagen nueva, se borra la anterior y se guarda la nueva
@@ -142,6 +153,7 @@ class UserController extends Controller
         $user = $user = auth()->user();
 
 
+
         // Crear una nueva serie con los datos del request
         $serie = new Serie([
             'name' => $request->name,
@@ -150,6 +162,13 @@ class UserController extends Controller
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
         ]);
+        //si tiene genres seleccionados, se guardan 
+        if ($request->genres) {
+            $serie->genres()->detach();
+            $serie->genres()->attach($request->input('genres'));
+        } else {
+            $serie->genres()->detach();
+        }
 
         // Asignar el usuario como autor de la serie
         $serie->author_id = $user->id;
