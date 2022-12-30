@@ -6,6 +6,7 @@ import Swal from 'sweetalert';
  */
 
 require('./bootstrap');
+import '@fortawesome/fontawesome-free/js/all';
 
 window.Vue = require('vue').default;
 

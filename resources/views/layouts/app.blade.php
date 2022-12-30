@@ -24,6 +24,9 @@
 
     <link href="{{ asset('css/index.css') }}" rel="stylesheet">
 
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+
 
 </head>
 
@@ -64,6 +67,7 @@
                         @else
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <img src="{{ asset('storage/users/'.Auth::user()->image) }}" alt="Imagen de perfil" class="rounded-circle" style="width: 30; height: 30px;">
                                 {{ Auth::user()->nickname }}
                             </a>
 
@@ -74,7 +78,7 @@
                                 <a class="dropdown-item" href="{{ route('user.publicaciones') }}">
                                     Publicacioens
                                 </a>
-                                <a class="dropdown-item" href="{{ route('main') }}">
+                                <a class="dropdown-item" href="{{ route('user.manage-account') }}">
                                     Gestionar cuenta
                                 </a>
 

@@ -13,7 +13,10 @@
                 <tbody>
                     <tr>
                         <th>Autor</th>
-                        <td>{{ $serie->author->name }}</td>
+                        <td>
+                            <a href="{{route('user.public-profile',['nickname'=>$serie->author->nickname])}}">
+                                <i class="fa fa-user"></i> {{ $serie->author->nickname }}</a>
+                        </td>
                     </tr>
                     <tr>
                         <th>Número de capítulos</th>

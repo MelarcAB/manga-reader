@@ -163,12 +163,7 @@ class UserController extends Controller
             'end_date' => $request->end_date,
         ]);
         //si tiene genres seleccionados, se guardan 
-        if ($request->genres) {
-            $serie->genres()->detach();
-            $serie->genres()->attach($request->input('genres'));
-        } else {
-            $serie->genres()->detach();
-        }
+
 
         // Asignar el usuario como autor de la serie
         $serie->author_id = $user->id;
@@ -176,7 +171,9 @@ class UserController extends Controller
 
         // Almacenar la serie en la base de datos
         $serie->save();
-
+        if ($request->genres) {
+            $serie->genres()->attach($request->input('genres'));
+        }
         // Subir la imagen de la serie a storage/app/public/series/ID
         //  $request->img->storeAs('series', $serie->id . '.' . $request->img->extension());
         $request->img->storeAs('public/series/' . $serie->id, $serie->id . '.' . $request->img->extension());
@@ -186,5 +183,36 @@ class UserController extends Controller
 
         // Redirigir a la vista de detalles de la serie creada
         return redirect()->route('serie.show', ['id' => $serie->id]);
+    }
+
+    public function manageAccountView()
+    {
+        return view('user.gestion.cuenta');
+    }
+
+    public function updateAccountInfo(Request $request)
+    {
+        // Validate form data
+        $request->validate([
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        // Get current user
+        $user = $user = auth()->user();
+
+        // Check if a new image was uploaded
+        if ($request->hasFile('image')) {
+            // Delete old image from storage
+
+
+            // Save new image to storage and update user's image field in database
+            $image = $request->file('image');
+            $image_path = $image->storeAs("public/users", $user->id . '.' . $image->getClientOriginalExtension());
+            $user->image = $user->id . '.' . $image->getClientOriginalExtension();
+            $user->save();
+        }
+
+        // Show success message or redirect to public profile page
+        return redirect()->route('user.public-profile', ['nickname' => $user->nickname])->with('success', 'Imagen de perfil actualizada con éxito');
     }
 }

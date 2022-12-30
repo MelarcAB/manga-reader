@@ -4,21 +4,21 @@
 
 <div class="container mt-5">
     <div class="row">
-        <div class="col-4">
-            <img src="{{ asset('storage/users/'.$user->id.'/'.$user->img) }}" alt="Imagen de perfil" class="img-thumbnail" style="width: 100%">
+        <div class="col-3">
+            <img src="{{ asset('storage/users/'.$user->image) }}" alt="Imagen de perfil" class="img-thumbnail img-fluid" style="max-width: 100%;">
         </div>
         <div class="col-8">
-            <h1>{{ $user->name }}</h1>
+            <h1>{{ $user->nickname }}</h1>
             <p>{{ $user->description }}</p>
         </div>
     </div>
     <hr>
-    <h2>Publicaciones de {{ $user->name }}</h2>
+    <h2>Publicaciones de {{ $user->nickname }}</h2>
     <div class="row mt-3">
         @foreach($series as $serie)
         <div class="col-3">
             <a href="{{ route('serie.show', $serie->id) }}">
-                <img src="{{ asset('storage/series/'.$serie->id.'/'.$serie->img) }}" alt="Imagen de la serie" class="img-thumbnail" style="width: 100%">
+                <img src="{{ asset('storage/series/'.$serie->id.'/'.$serie->img) }}" alt="Imagen de la serie" class="img-thumbnail img-fluid" style="max-width: 100%;">
                 <h3>{{ $serie->name }}</h3>
             </a>
         </div>
