@@ -42,3 +42,7 @@ Route::get('/publication/{id}/chapters',  [App\Http\Controllers\UserController::
 Route::get('/publication/{id}/chapter',  [App\Http\Controllers\UserController::class, 'uploadChapter'])->name('publication.uploadchapter');
 Route::get('/publication/{id}/chapter/{idchapter}',  [App\Http\Controllers\UserController::class, 'uploadChapter'])->name('publication.uploadeditchapter');
 Route::post('/publication/newchapter', [App\Http\Controllers\ChapterController::class, 'store'])->name('chapter.store');
+
+
+//profile
+Route::get('/u/{nickname}', [App\Http\Controllers\HomePublicController::class, 'showPublicProfile'])->name('user.public-profile');
