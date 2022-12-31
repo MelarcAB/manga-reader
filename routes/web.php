@@ -50,3 +50,6 @@ Route::get('/manage-account', [App\Http\Controllers\UserController::class, 'mana
 Route::post('/manage-account/update-account-info', [App\Http\Controllers\UserController::class, 'updateAccountInfo'])->name('user.update-account-info');
 Route::get('/manage-profile', [App\Http\Controllers\UserController::class, 'manageProfileView'])->name('user.manage-profile');
 Route::post('/manage-account/update-profile-info', [App\Http\Controllers\UserController::class, 'updateProfileInfo'])->name('user.update-profile-info');
+
+Route::get('/auth/google', 'App\Http\Controllers\Auth\LoginController@redirectToGoogle')->name('login.google');
+Route::get('/auth/google/callback', 'App\Http\Controllers\Auth\LoginController@handleGoogleCallback');
