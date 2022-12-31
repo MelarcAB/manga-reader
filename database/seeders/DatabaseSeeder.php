@@ -18,6 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SocialNetworksSeeder::class);
         $this->call(LanguagesSeeder::class);
         $this->call(GenresSeeder::class);
-        $this->call(SerieChapterSeeder::class);
+        // $this->call(SerieChapterSeeder::class);
     }
 }
