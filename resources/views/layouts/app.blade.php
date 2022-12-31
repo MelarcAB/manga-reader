@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Manganol es la plataforma perfecta para dibujantes e ilustradores de manga. Sube tus comics o ilustraciones y compártelos con otros usuarios. ¡Únete a nuestra comunidad de artistas y descubre el increíble talento que hay en el mundo del manga!">
-
+    <meta property="og:image" content="{{ asset('img/logo_manganol.svg') }}">
     <meta name="keywords" content="manga,mangañol,manganol,manga español, manga españa, manga latino, autores españoles, comics, ilustraciones, dibujantes, ilustradores, arte, comunidad, talento, artistas">
 
     <!-- CSRF Token -->
