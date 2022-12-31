@@ -30,6 +30,8 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
     'google' => [
+        'client_id' => '149282686227-f0jebd38405mr4pmfpub6g51srmo28u7.apps.googleusercontent.com',
+        'client_secret' => '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',
         'redirect' => env('APP_URL') . '/auth/google/callback',
 
         //'redirect' => 'https://manganol.es/auth/google/callback',
