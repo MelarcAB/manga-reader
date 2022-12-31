@@ -25,7 +25,7 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="nickname" class="col-md-4 col-form-label text-md-end">{{ __('Nickname') }}</label>
+                            <label for="nickname" class="col-md-4 col-form-label text-md-end">{{ __('Nombre de usuario') }}</label>
 
                             <div class="col-md-6">
                                 <input id="nickname" type="text" class="form-control @error('nickname') is-invalid @enderror" name="nickname" value="{{ old('nickname') }}" required autocomplete="nickname" autofocus>
@@ -64,6 +64,10 @@
                                 </span>
                                 @enderror
                             </div>
+                            <div class="col-md-6 offset-md-4">
+                                <small>La contraseña debe tener al menos 8 carácteres.</small>
+                            </div>
+
                         </div>
 
                         <div class="row mb-3">

@@ -98,5 +98,27 @@
     background-color: var(--quinary);
     color : var(--secondary);
   }
+
+  .btn-primary{
+    background-color: var(--quinary);
+    color : var(--quaternary);
+    border: none;
+  }
+  .btn-primary:hover{
+    background-color: var(--quaternary);
+    color : var(--quinary);
+    border: none;
+  }
+  .btn-primary:focus{
+    background-color: var(--quaternary);
+    color : var(--quinary);
+    border: none;
+  }
+  .btn-primary:active{
+    background-color: var(--quaternary);
+    color : var(--quinary);
+    border: none;
+  }
+  
   
   
