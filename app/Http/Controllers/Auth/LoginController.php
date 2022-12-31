@@ -8,6 +8,9 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Socialite;
 use Google_Client;
 use Google_Service_Oauth2;
+use App\Models\User;
+use App\Models\Helper;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -48,8 +51,30 @@ class LoginController extends Controller
 
     public function handleGoogleCallback()
     {
-        $user = Socialite::driver('google')->user();
-        echo "ok";
-        return;
+        // Obtener los datos del usuario desde Google
+        $googleUser = Socialite::driver('google')->user();
+
+        // Verificar si el usuario ya existe en la base de datos por email
+        $user = User::where('email', $googleUser->email)->first();
+
+        if ($user) {
+            // Si el usuario ya existe, actualizar su google_id y iniciar sesión
+            $user->google_id = $googleUser->id;
+            $user->save();
+            Auth::login($user);
+        } else {
+            // Si el usuario no existe, crear un nuevo usuario con los datos de Google y iniciar sesión
+            $user = new User();
+            $user->name = $googleUser->name;
+            $user->nickname = Helper::validateNickname($googleUser->name);
+            $user->email = $googleUser->email;
+            $user->google_id = $googleUser->id;
+            $user->password = bcrypt(bin2hex(random_bytes(4)));
+
+            $user->save();
+            Auth::login($user);
+        }
+
+        return redirect()->route('home');
     }
 }
