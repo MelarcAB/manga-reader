@@ -47,22 +47,24 @@
     <hr>
     <h2>Capítulos</h2>
     <div class="row">
-
         @foreach ($serie->chapters as $chapter)
         <div class="col-md-4">
             <div class="card mb-4 shadow-sm card-no-border card-body-color-custom">
                 <div class="card-body card-body-color-custom">
-                    <h5 class="card-title">{{ $chapter->issue_number }} : {{ $chapter->name }}</h5>
-                    <p class="card-text">{{ $chapter->description }}</p>
-                    <p>Número de capítulo: {{ $chapter->issue_number }}</p>
-                    <p>Fecha de lanzamiento: {{ $chapter->release_date }}</p>
+                    <h5 class="card-title" style="margin-bottom: 10px;">{{ $chapter->issue_number }} : {{ $chapter->name }}</h5>
+                    <p class="card-text" style="margin-bottom: 5px;">{{ $chapter->description }}</p>
+                    <p style="margin-bottom: 5px;">Número de capítulo: {{ $chapter->issue_number }}</p>
+                    <p style="margin-bottom: 5px;">Fecha de lanzamiento: {{ $chapter->release_date }}</p>
                     <div class="d-flex justify-content-between align-items-center">
-                        <a href="{{route('chapter.pages',['id'=>$chapter->id])}}" class="btn btn-primary">Leer</a>
+                        <a href="{{route('chapter.pages',['id'=>$chapter->id])}}" class="btn btn-primary" style="margin-top: 10px;">Leer</a>
                     </div>
                 </div>
             </div>
         </div>
         @endforeach
     </div>
+
+
+
 </div>
 @endsection

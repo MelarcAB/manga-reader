@@ -79,6 +79,13 @@ $metaTags = Helper::getMetaTags(Route::currentRouteName());
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
+
+                        <li class="nav-item">
+                            <form class="d-flex" action="{{route('search')}}" method="GET">
+                                <input class="form-control mr-sm-2" type="search" name="q" placeholder="Buscar..." aria-label="Search">
+                                <button class="btn btn-primary my-2 my-sm-0" type="submit"> <i class="fa fa-search"></i></button>
+                            </form>
+                        </li>
                         <!-- Authentication Links -->
                         @guest
                         @if (Route::has('login'))
@@ -86,7 +93,6 @@ $metaTags = Helper::getMetaTags(Route::currentRouteName());
                             <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
                         @endif
-
                         @if (Route::has('register'))
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
@@ -122,6 +128,7 @@ $metaTags = Helper::getMetaTags(Route::currentRouteName());
 
                         </li>
                         @endguest
+
                     </ul>
                 </div>
             </div>

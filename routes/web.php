@@ -53,3 +53,6 @@ Route::post('/manage-account/update-profile-info', [App\Http\Controllers\UserCon
 
 Route::get('/auth/google', 'App\Http\Controllers\Auth\LoginController@redirectToGoogle')->name('login.google');
 Route::get('/auth/google/callback', 'App\Http\Controllers\Auth\LoginController@handleGoogleCallback');
+
+Route::get("/search", "App\Http\Controllers\HomePublicController@search")->name("search");
+Route::get("/search/{q}", "App\Http\Controllers\HomePublicController@search")->name("filter.search");

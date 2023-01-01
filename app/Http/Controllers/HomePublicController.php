@@ -7,6 +7,9 @@ use App\Models\Serie;
 use App\Models\User;
 use App\Models\Chapter;
 use App\Models\SocialNet;
+use Illuminate\Support\Facades\DB;
+
+
 
 class HomePublicController extends Controller
 {
@@ -28,5 +31,33 @@ class HomePublicController extends Controller
         //social networks
         $socialNets = $user->socialNets;
         return view('user.public.profile', compact('user', 'series', 'socialNets'));
+    }
+
+    public function search(Request $request)
+    {
+
+        //obtener busqueda
+        $q = $request->input('q');
+
+
+
+        //si la busqueda es vacia, redirigir a home
+        if ($q == "") {
+            return redirect()->route('home');
+        }
+        $search = DB::raw('%' . $q . '%');
+
+        $series = Serie::where('name', 'like', '%' . $search . '%')
+            ->orWhere('description', 'like', '%' . $search . '%')
+            ->orWhereHas('chapters', function ($query) use ($search) {
+                $query->where('name', 'like', '%' . $search . '%')
+                    ->orWhere('description', 'like', '%' . $search . '%');
+            })
+            ->orWhereHas('author', function ($query) use ($search) {
+                $query->where('nickname', 'like', '%' . $search . '%');
+            })
+            ->get();
+
+        return view('serie.search', compact('series', 'q'));
     }
 }

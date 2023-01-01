@@ -239,7 +239,7 @@ class UserController extends Controller
         // Validate form data
         $request->validate([
             'name' => 'required|max:255',
-            'description' => 'required',
+            'description' => 'nullable',
         ]);
 
         // Get current user
