@@ -1,18 +1,43 @@
+@php
+use App\Models\Helper;
+$metaTags = Helper::getMetaTags(Route::currentRouteName());
+echo Route::currentRouteName()."<br>";
+@endphp
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Manganol es la plataforma perfecta para dibujantes e ilustradores de manga. Sube tus comics o ilustraciones y compártelos con otros usuarios. ¡Únete a nuestra comunidad de artistas y descubre el increíble talento que hay en el mundo del manga!">
-    <meta property="og:image" content="{{ asset('img/logo_manganol.svg') }}">
-    <meta name="keywords" content="manga,mangañol,manganol,manga español, manga españa, manga latino, autores españoles, comics, ilustraciones, dibujantes, ilustradores, arte, comunidad, talento, artistas">
+    <!--meta tags-->
+
+    <title>{{ $metaTags['title'] }}</title>
+    <meta name="description" content="{{ $metaTags['description'] }}">
+    <meta name="keywords" content="{{ $metaTags['keywords'] }}">
+
+    <meta property="og:url" content="{{ $metaTags['og:url'] }}">
+    <meta property="og:title" content="{{ $metaTags['og:title'] }}">
+    <meta property="og:description" content="{{ $metaTags['og:description'] }}">
+    <meta property="og:image" content="{{ $metaTags['og:image'] }}">
+    <meta property="og:site_name" content="{{ $metaTags['og:site_name'] }}">
+    <meta property="og:type" content="{{ $metaTags['og:type'] }}">
+    <meta property="og:locale" content="{{ $metaTags['og:locale'] }}">
+
+    <meta name="twitter:card" content="{{ $metaTags['twitter:card'] }}">
+    <meta property="twitter:domain" content="{{ $metaTags['twitter:domain'] }}">
+    <meta property="twitter:url" content="{{ $metaTags['twitter:url'] }}">
+    <meta name="twitter:title" content="{{ $metaTags['twitter:title'] }}">
+    <meta name="twitter:description" content="{{ $metaTags['twitter:description'] }}">
+    <meta name="twitter:image" content="{{ $metaTags['twitter:image'] }}">
+
+    <!-- end meta tags -->
+
+
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/logo-min.ico') }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
