@@ -1,7 +1,6 @@
 @php
 use App\Models\Helper;
 $metaTags = Helper::getMetaTags(Route::currentRouteName());
-echo Route::currentRouteName()."<br>";
 @endphp
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
