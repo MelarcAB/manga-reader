@@ -110,7 +110,10 @@ $metaTags = Helper::getMetaTags(Route::currentRouteName());
                                     Perfil
                                 </a>
                                 <a class="dropdown-item" href="{{ route('user.publicaciones') }}">
-                                    Publicacioens
+                                    Publicaciones
+                                </a>
+                                <a class="dropdown-item" href="{{ route('series.following') }}">
+                                    Siguiendo
                                 </a>
                                 <a class="dropdown-item" href="{{ route('user.manage-account') }}">
                                     Gestionar cuenta

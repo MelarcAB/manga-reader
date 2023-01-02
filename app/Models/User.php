@@ -81,4 +81,28 @@ class User extends Authenticatable implements JWTSubject
         // return $this->belongsToMany(SocialNet::class, 'user_socialnet', 'user_id', 'socialnet_id');
         return $this->belongsToMany(SocialNet::class, 'user_socialnet', 'user_id', 'socialnet_id')->withPivot('url');
     }
+
+    public function series()
+    {
+        return $this->belongsToMany(Serie::class, 'users_series', 'user_id', 'serie_id');
+    }
+
+    public function follow(Serie $serie)
+    {
+        $this->series()->attach($serie);
+    }
+
+    public function unfollow(Serie $serie)
+    {
+        $this->series()->detach($serie);
+    }
+
+    public function isFollowing(Serie $serie)
+    {
+        return $this->series()->where('serie_id', $serie->id)->exists();
+    }
+    public function suscriptions()
+    {
+        return $this->belongsToMany(Serie::class, 'users_suscriptions', 'user_id', 'serie_id');
+    }
 }

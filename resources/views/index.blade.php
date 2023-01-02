@@ -10,7 +10,7 @@
                 <div class="col-md-3">
                     <div class="card mb-4 shadow-sm card-no-border">
                         <div class="card-img-top-container position-relative">
-                            <img src="{{ asset('storage/series/'.$serie->id.'/'.$serie->img) }}" class="card-img-top" alt="Imagen de la serie">
+                            <a href="{{route('serie.show',['id'=>$serie->id])}}"><img src="{{ asset('storage/series/'.$serie->id.'/'.$serie->img) }}" class="card-img-top" alt="Imagen de la serie"></a>
                             <div class="dark-overlay">
                                 <a href="{{route('serie.show',['id'=>$serie->id])}}">
                                     <h5 class="card-title text-center" style="padding-top: 5px;">{{ $serie->name }}</h5>

@@ -54,5 +54,9 @@ Route::post('/manage-account/update-profile-info', [App\Http\Controllers\UserCon
 Route::get('/auth/google', 'App\Http\Controllers\Auth\LoginController@redirectToGoogle')->name('login.google');
 Route::get('/auth/google/callback', 'App\Http\Controllers\Auth\LoginController@handleGoogleCallback');
 
+Route::get("/following", "App\Http\Controllers\UserController@followingSeries")->name("series.following");
 Route::get("/search", "App\Http\Controllers\HomePublicController@search")->name("search");
 Route::get("/search/{q}", "App\Http\Controllers\HomePublicController@search")->name("filter.search");
+
+Route::post('/series/{serie_id}/follow', 'App\Http\Controllers\UserController@follow')->name('serie.follow');
+Route::post('/series/{serie_id}/unfollow', 'App\Http\Controllers\UserController@unfollow')->name('serie.unfollow');

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Chapter;
 use App\Models\Language;
+use Auth;
 
 class Serie extends Model
 {
@@ -38,6 +39,17 @@ class Serie extends Model
         return $this->belongsToMany(Genre::class);
     }
 
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'users_series', 'serie_id', 'user_id');
+    }
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'users_suscriptions', 'serie_id', 'user_id');
+    }
+
+
     public function getGenresNames()
     {
         $genres = $this->genres;
@@ -46,5 +58,14 @@ class Serie extends Model
             $genresNames[] = $genre->name;
         }
         return $genresNames;
+    }
+    public function isFollowing()
+    {
+        $user = Auth::user();
+        if ($user) {
+            $following = $user->suscriptions()->where('serie_id', $this->id)->first();
+            return $following != null;
+        }
+        return false;
     }
 }

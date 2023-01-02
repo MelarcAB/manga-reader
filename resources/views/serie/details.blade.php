@@ -5,6 +5,26 @@
     <div class="row">
         <div class="col-md-3">
             <img src="{{ asset('storage/series/'.$serie->id.'/'.$serie->img) }}" class="img-fluid" alt="Imagen de la serie">
+            @if (Auth::check())
+            @if ($serie->isFollowing())
+            <p>Ya estás siguiendo esta serie. </p>
+            <form action="{{ route('serie.unfollow',['serie_id'=>$serie->id]) }}" method="POST">
+                @csrf
+                <input type="hidden" name="serie_id" value="{{ $serie->id }}">
+                <button type="submit" class="btn btn-primary">Dejar de seguir</button>
+            </form>
+            @else
+            <form action="{{ route('serie.follow',['serie_id'=>$serie->id]) }}" method="POST">
+                @csrf
+                <input type="hidden" name="serie_id" value="{{ $serie->id }}">
+                <button type="submit" class="btn btn-primary">Seguir serie</button>
+            </form>
+            @endif
+            @else
+            <p>Para seguir esta serie, debes <a href="{{ route('login') }}">iniciar sesión</a>.</p>
+            @endif
+
+
         </div>
         <div class="col-md-9">
             <h1>{{ $serie->name }}</h1>
@@ -39,6 +59,10 @@
                     <tr>
                         <th>Géneros</th>
                         <td>{{ implode(', ', $serie->getGenresNames()) }}</td>
+                    </tr>
+                    <tr>
+                        <th>Personas siguiendo esta serie</th>
+                        <td>{{ count( $serie->followers) }}</td>
                     </tr>
                 </tbody>
             </table>

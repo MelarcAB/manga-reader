@@ -279,4 +279,34 @@ class UserController extends Controller
         // Show success message or redirect to public profile page
         return redirect()->route('user.manage-profile')->with('success', 'Perfil actualizado con éxito');
     }
+
+    public function follow(Request $request, $serie_id)
+    {
+        $user = $request->user();
+        $serie = Serie::find($serie_id);
+        $suscriptions = $user->suscriptions;
+        foreach ($suscriptions as $subscription) {
+            if ($subscription->id == $serie->id) {
+                // Mostrar un mensaje de error
+                return redirect()->back()->with('error', 'Ya estás siguiendo esta serie.');
+            }
+        }
+        $user->suscriptions()->attach($serie_id);
+        // Mostrar un mensaje de éxito
+        return redirect()->back()->with('success', 'Has empezado a seguir esta serie.');
+    }
+    public function unfollow(Request $request, $serie_id)
+    {
+        $user = $request->user();
+        $user->suscriptions()->detach($serie_id);
+        // Mostrar un mensaje de éxito
+        return redirect()->back()->with('success', 'Has dejado de seguir esta serie.');
+    }
+
+    public function followingSeries(Request $request)
+    {
+        $user = $request->user();
+        $series = $user->suscriptions;
+        return view('user.gestion.following', compact('series', 'user'));
+    }
 }
